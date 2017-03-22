@@ -1,7 +1,7 @@
 ## Multiprocessing for Mortals (M4M)
-EMBL Coding Club Mini-Tutorial
-by Jonas Hartmann
-23.03.2017
+EMBL Coding Club Mini-Tutorial    
+by Jonas Hartmann    
+23.03.2017    
 
 
 ### Abstract
