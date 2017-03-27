@@ -4,7 +4,7 @@ Created on Wed Mar 22 10:11:12 2017
 
 @author:    Jonas Hartmann @ Gilmour group @ EMBL Heidelberg
 
-@descript:  Exercise of simple multiprocessing in Python.
+@descript:  Exercise on simple multiprocessing in Python.
             This code contains a loop that produces some interesting results
             but takes a while to run (about 2min with the default settings,
             depending on your computer).
