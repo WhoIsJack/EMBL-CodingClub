@@ -11777,7 +11777,7 @@ div#notebook {
 <p>For a 'wet lab' biologist, knowledge of differential equation modeling thus has many benefits:</p>
 <ul>
 <li>It provides the ability to <strong>quickly create simple models</strong> using basic equations<ul>
-<li>Just creating a model will help you think about the system differently!</li>
+<li><em>Just creating a model will help you think about the system differently!!!</em></li>
 <li>Simple simulations are good sanity checks for hypotheses!</li>
 </ul>
 </li>
@@ -11800,8 +11800,8 @@ div#notebook {
 <p>For those biologists (from 'wet lab' or 'dry lab') who get into differential equation modeling more deeply, a range of additional applications awaits:</p>
 <ul>
 <li>Creation of complicated models, including custom equations</li>
-<li>Fitting of parameters based on data</li>
 <li>Exploration of systems with parameter screens</li>
+<li>Fitting of parameters based on data</li>
 <li>Prediction of wild-type and mutant outcomes</li>
 <li>Combination with different types of models (particle-based, vertex-based, cellular Pots, ...)</li>
 </ul>
@@ -11814,11 +11814,11 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Ordinary-Differential-Equations-(ODEs)">Ordinary Differential Equations (ODEs)<a class="anchor-link" href="#Ordinary-Differential-Equations-(ODEs)">&#182;</a></h3><p>Differential equations describe the relationship of <code>functions</code> with their <code>derivatives</code>. In practice, the <code>functions</code> represent properties of the system (such as the concentration of a protein) and the <code>derivatives</code> represent how these properties change over time. Differential equations are a natural way of describing systems whose state at time t<sub>1</sub> is in some way dependent on their state at t<sub>0</sub>.</p>
-<p>The following is a simple example of an <code>Ordinary Differential Equation</code> (<code>ODE</code>). It describes the change ($\delta$) of a variable $X$ over time $t$ (written as $\frac{\delta X}{\delta t}$) based on the parameter $a$ and the variable $X$ itself.</p>
+<h3 id="Ordinary-Differential-Equations-(ODEs)">Ordinary Differential Equations (ODEs)<a class="anchor-link" href="#Ordinary-Differential-Equations-(ODEs)">&#182;</a></h3><p>Differential equations describe the relationship of <code>functions</code> with their <code>derivatives</code>. In most practical cases in biology, the <code>functions</code> represent properties of the system (such as the concentration of a protein) and the <code>derivatives</code> represent how these properties change over time. Differential equations are a natural way of describing systems whose state at time $t_1$ is in some way dependent on their state at $t_0$.</p>
+<p>The following is a simple example of an <code>Ordinary Differential Equation</code> (<code>ODE</code>). It describes the change ($\delta$) of a time-dependent variable $X(t)$ over time $t$ (written as $\frac{\delta X}{\delta t}$) based on the parameter $a$ and the function $X(t)$ itself.</p>
 \begin{equation*}
-\frac{\delta X}{\delta t} =
-a \cdot X
+\frac{\delta X(t)}{\delta t} =
+a \cdot X(t)
 \end{equation*}
 </div>
 </div>
@@ -11830,8 +11830,8 @@ a \cdot X
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>A slightly more complicated case would be a system of two <code>ODEs</code> where the state of one variable affects the rate of change of the other.</p>
 \begin{align}
-\frac{\delta X}{\delta t} & = a \cdot X - b \cdot Y \\
-\frac{\delta Y}{\delta t} & = c \cdot Y + d \cdot X
+\frac{\delta X(t)}{\delta t} & = a \cdot X(t) - b \cdot Y(t) \\
+\frac{\delta Y(t)}{\delta t} & = c \cdot Y(t) + d \cdot X(t)
 \end{align}
 </div>
 </div>
@@ -11841,10 +11841,10 @@ a \cdot X
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If $X$ is a function of multiple variables, we have a <code>Partial Differential Equation</code> (<code>PDE</code>). These are very useful to describe how the concentration of a protein changes both in time and in space (e.g. through diffusion). The example below is a <code>PDE</code> that includes diffusion, where $D$ is the coefficient of diffusion and $q$ is space; the second derivative of $X$ with regards to $q$ (written as $\frac{\delta ^2X}{\delta q^2}$) describes diffusion in space. <em>Note: this tutorial does not cover <code>PDEs</code>, as that would be beyond the scope of the mini-tutorial format.</em></p>
+<p>If $X$ is a function of multiple variables, we have a <code>Partial Differential Equation</code> (<code>PDE</code>). These are very useful to describe e.g. how the concentration of a protein changes both in time and in space (e.g. through diffusion). The example below is a <code>PDE</code> that includes diffusion, where $D$ is the coefficient of diffusion and $s$ is space; the second derivative of $X(t,s)$ with regards to $s$ (written as $\frac{\delta ^2X(t,s)}{\delta s^2}$) describes diffusion in space. <em>Note: this tutorial does not cover <code>PDEs</code> beyond this point, as that would be beyond the scope of the mini-tutorial format.</em></p>
 \begin{equation*}
-\frac{\delta X}{\delta t} =
-a \cdot X - D \frac{\delta ^2X}{\delta q^2} 
+\frac{\delta X(t,s)}{\delta t} =
+a \cdot X(t,s) - D \frac{\delta ^2X(t,s)}{\delta s^2} 
 \end{equation*}
 </div>
 </div>
@@ -11855,14 +11855,17 @@ a \cdot X - D \frac{\delta ^2X}{\delta q^2}
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="From-'Arrows'-to-ODEs">From 'Arrows' to ODEs<a class="anchor-link" href="#From-'Arrows'-to-ODEs">&#182;</a></h3><p>As biologists, we are used to visualizing biochemical systems by means of <code>arrow schemes</code>.</p>
-<p><img src="ipynb_figures/simple_mutual_activation.png" alt="Simple Mutual Activation" style="width: 150px;"/></p>
-<p>Arrow schemes are simple and intuitive but also have many drawbacks. One crucial issue is that they are static and cannot represent any of the dynamics that might emerge from the biochemical system in question.</p>
-<p>Fortunately, arrow schemes can very easily be translated into sets of ODEs which allow us to think about and simulate the dynamics of the system!</p>
+<p><img src="ipynb_figures/decay.png" alt="Simple Decay of A to B" style="width: 150px;"/></p>
+<center>*This scheme represents the spontaneous 'decay' of molecule A into molecule B.*</center>
+
+<p>Arrow schemes are simple and intuitive but they also have many drawbacks. One crucial issue is that they are static and cannot represent any of the dynamics that might emerge from the biochemical system in question.</p>
+<p>Fortunately, arrow schemes can often very easily be translated into sets of ODEs which allow us to think about and simulate the dynamics of the system!</p>
 <p>The set of ODEs describing the system above is:</p>
 \begin{align}
-\frac{\delta A}{\delta t} & = -p \cdot A + r \cdot B\\
-\frac{\delta B}{\delta t} & =  p \cdot A - r \cdot B\\
-\end{align}<center>*...where $p$ is a parameter describing the `rate` at which $A$ changes into $B$.*</center>
+\frac{\delta A(t)}{\delta t} & = -p \cdot A(t) \\
+\frac{\delta B(t)}{\delta t} & =  p \cdot A(t) \\
+\end{align}<p><br><center><em>...where $p$ is a parameter describing the <code>rate</code> at which $A$ decays into $B$.</em></center></p>
+
 </div>
 </div>
 </div>
@@ -11874,15 +11877,25 @@ a \cdot X - D \frac{\delta ^2X}{\delta q^2}
 <p><strong>How to find the ODEs:</strong></p>
 <ul>
 <li>Consider every reactant in the arrow scheme a <code>function</code> in the set of ODEs (here $A$ and $B$)<ul>
-<li>You need one ODE per reactant</li>
+<li>You always need one ODE per reactant!</li>
 </ul>
 </li>
 </ul>
 <ul>
 <li>Every arrow between reactants shows up as a term in the ODEs of the reactants involved<ul>
 <li>The terms are always products of a characteristic <code>parameter</code> (here $p$) and the substrate(s) (here $A$)</li>
-<li>In the ODE of the substrate (which gets removed), the term is negative (here $-p \cdot A$)</li>
+<li>In the ODE of a substrate (which gets removed), the term is negative (here $-p \cdot A$)</li>
 <li>In the ODE of the product (which gets produced), the term is positive (here $p \cdot A$)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Some arrows are best modeled as non-classical reactions that for example do not 'consume' the substrates<ul>
+<li>One example would be the activation of gene expression, which does not usually 'destroy' the transcription factors</li>
+<li>It is less clearly defined how to model these kinds of interactions</li>
+<li>Usually, they are modeled as modulations of another parameter (e.g. the production rate of RNA)</li>
+<li>The exact function used to modulate the other reaction can be chosen freely, based on what makes sense for the reaction in question</li>
+<li>A good starting point is a <code>Michaelis-Menten</code>-like function, see the transcription factor example below</li>
 </ul>
 </li>
 </ul>
@@ -11897,17 +11910,36 @@ a \cdot X - D \frac{\delta ^2X}{\delta q^2}
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<p><strong>Example 1: Simplified Enzymatic Reaction</strong></p>
-<p>Here's a simplified arrow scheme of an enzyme $E$ binding and converting a substrate $S$ to an (initially still bound as $EP$) product $P$:</p>
-<p><img src="ipynb_figures/simple_enzyme.png" alt="Simple Enzymatic Reaction" style="width: 300px;"/></p>
+<p><strong>Example 1: Ligand-Receptor Binding</strong></p>
+<p>This example shows a ligand binding its receptor. Of course, reactions like these are reversible, so the ligand can also spontaneously unbind from the receptor again. The affinity of the two molecules with each other is given by the ratio of the two parameters $b$ and $u$ that determine the rate of binding and unbinding, respectively.</p>
+<p><img src="ipynb_figures/ligand_receptor_binding.png" alt="Ligand Receptor Binding and Unbinding" style="width: 270px;"/></p>
+<p>The corresponding equations are similar to the 'decay' example above, except that now there is also a reverse reaction and the dimerization of ligand and receptor has to be taken into account. Note that the equations for the receptor and ligand are identical and exactly the reverse of the equation for the receptor-ligand complex.</p>
+\begin{align}
+\frac{\delta R}{\delta t} & = -b \cdot R \cdot L + u \cdot RL \\
+\frac{\delta L}{\delta t} & = -b \cdot R \cdot L + u \cdot RL \\
+\frac{\delta RL}{\delta t} & =\ \ \  b \cdot R \cdot L - u \cdot RL \\
+\end{align}<p><br><center><em>Side note: $R(t)$, $L(t)$ and $RL(t)$ are shortened to $R$, $L$ and $RL$ to improve readability.</em><center></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+<p><strong>Example 2: Simplified Enzymatic Reaction</strong></p>
+<p>Here's a simplified arrow scheme of an enzyme $E$ binding and converting a substrate $S$ to a product $P$, which is initially still bound in a complex $EP$ but then released:</p>
+<p><img src="ipynb_figures/enzyme.png" alt="Simple Enzymatic Reaction" style="width: 300px;"/></p>
 <p>This translates to the following equations:</p>
 \begin{align}
 \frac{\delta E}{\delta t} & = -b \cdot E \cdot S + d \cdot EP \\
 \frac{\delta S}{\delta t} & =  -b \cdot E \cdot S \\
 \frac{\delta EP}{\delta t} & =  b \cdot E \cdot S - d \cdot EP \\
 \frac{\delta P}{\delta t} & =  d \cdot EP \\
-\end{align}<p>Note that there are a number of simplifying assumptions here, namely that the intermediate state is modeled only by a complex of $EP$, which means the reaction of $S$ to $P$ is treated as instantaneous (relative to the binding and unbinding reactions). Consequently, there is no unbinding reaction of $E$ and $S$. There is also no spontaneous binding of $E$ and $P$ into $EP$, meaning that the affinity of the enzyme for the product is very low.</p>
-<p>Simplifying assumptions like this can be legitimate, but it's important be clearly aware of them.</p>
+\end{align}<p>Note that there are a number of simplifying assumptions being made here, namely that the intermediate state is modeled only by a complex of $EP$, which means the reaction of $S$ to $P$ is treated as instantaneous (relative to the binding and unbinding reactions). Consequently, there is no unbinding reaction of $ES$ into $E+S$. The possibility of a spontaneous binding of $E$ and $P$ into $EP$ is also not modeled; the assumption is simply that the affinity of the product for the enzyme is very low.</p>
+<p><font color='red'><strong>Important note:</strong></font> Simplifying assumptions like this <strong><em>may</em></strong> be legitimate, but it's important to remain <strong><em>acutely aware</em></strong> of them!</p>
 
 </div>
 </div>
@@ -11918,34 +11950,15 @@ a \cdot X - D \frac{\delta ^2X}{\delta q^2}
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<p><strong>Example 2: Ligand-Receptor Binding and Dimerization</strong></p>
-<p>Here's a receptor $R$ that binds ligand $L$ and dimerizes upon ligand binding.</p>
-<p><img src="ipynb_figures/receptor_ligand_dimerization.png" alt="Receptor-Ligand Binding and Dimerization" style="width: 300px;"/></p>
-<p>This system could be modeled with the following ODEs:</p>
-\begin{align}
-\frac{\delta R}{\delta t} & = -b \cdot L \cdot R + u \cdot LR \\
-\frac{\delta L}{\delta t} & =  -b \cdot L \cdot R + u \cdot LR \\
-\frac{\delta RL}{\delta t} & =  b \cdot L \cdot R - u \cdot LR - d \cdot RL \cdot RL + r \cdot RLLR \\
-\frac{\delta RLLR}{\delta t} & =  d \cdot RL \cdot RL - r \cdot RLLR \\
-\end{align}
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-<p><strong>Example 3: Enhancer of Transcription</strong></p>
-<p>Now we are looking at the expression and degradation of an $RNA$, both of which happen with a base rate $e$ and $d$, respectively. The expression is modulated by the concentration of a $TF$.</p>
+<p><strong>Example 3: Transcriptional Factor</strong></p>
+<p>Here we are looking at the expression and degradation of an $RNA$, both of which we model with a base rate ($e$ and $d$, respectively). The expression is modulated by the concentration of a $TF$.</p>
 <p><img src="ipynb_figures/transcription_factor.png" alt="Transcriptional Enhancer" style="width: 170px;"/></p>
-<p>Because we don't model the modulation by $TF$ as a properly defined chemical reaction, we are more free in choosing what by what function we would like to relate the concentration of $TF$ to the production rate of $RNA$ (here, 'more free' also means more likely to make a mistake!).</p>
-<p>As a starting point, let's simply choose a saturation curve where the maximum factor of expression increase $i_{max}$ is reached asympotically at a rate defined by the half-maximal TF concentration $TF_{1/2}$, similar to a <code>Michaelis-Menten Equation</code>.</p>
+<p>Because we don't model the modulation by the $TF$ as a properly defined chemical reaction, we are more free in choosing by what function we would like to relate the concentration of $TF$ to the production rate of $RNA$. Note that 'more free' also means 'more likely to make a mistake'...</p>
+<p>A good starting point is a saturation curve where the maximum factor of expression increase $i_{max}$ is reached asympotically at a rate defined by the half-maximal TF concentration $TF_{1/2}$. This kind of relationship is well known from enzyme kinetics as a <code>Michaelis-Menten Equation</code>.</p>
 \begin{align}
-\frac{\delta R}{\delta TF}  & = 0 \\
-\frac{\delta L}{\delta RNA} & = e \cdot (\frac{i_{max} \cdot TF}{TF_{1/2} + TF})  - d \cdot RNA \\
-\end{align}<p>Note that $\frac{\delta R}{\delta TF} = 0$ means that we keep the concentration of $TF$ constant.</p>
+\frac{\delta TF}{\delta t}  & = 0 \\
+\frac{\delta RNA}{\delta t} & = e + \frac{i_{max} \cdot TF}{TF_{1/2} + TF}  - d \cdot RNA \\
+\end{align}<p>Note that $\frac{\delta TF}{\delta t} = 0$ means that we keep the concentration of $TF$ constant.</p>
 
 </div>
 </div>
@@ -11956,15 +11969,15 @@ a \cdot X - D \frac{\delta ^2X}{\delta q^2}
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<p><strong>Exercise 1: Double-Negative Positive Feedback Loops</strong></p>
-<p>Convert this motif into the corresponding set of ODEs.</p>
-<p><img src="ipynb_figures/bistable.png" alt="DNPF Bistable Circuit" style="width: 300px;"/></p>
-<p>Your solution:</p>
-<p><br></p>
-<p><font color='gray'>If you wish, you can use the TEX syntax to write the equations here (see the above examples to figure it out).<br>
-Its probably easier to just do it by hand, though.</font><br>
+<font color='teal'>**Exercise 1: Ligand-Receptor Binding & Dimerization**</font>
+
+<p>This is a slightly more complicated version of the ligand-receptor example shown above, inspired by receptor tyrosine kinases (RTKs). Following the binding of the ligand, the receptor dimerizes with other ligand-bound receptors.</p>
+<p><img src="ipynb_figures/receptor_ligand_dimerization.png" alt="Receptor-Ligand Binding and Dimerization" style="width: 300px;"/></p>
+<p><em>Convert this motif into a set of ODEs.</em></p>
+<p><font color='gray'>If you wish, you can use the TEX syntax to write the equations here.<br>
+If you have no experience with TEX equations, you can just check out the above examples to figure it out.<br>
+Its probably easier to just write down the equations by hand, though.</font><br>
 <br></p>
-<p>Side note: this is an example of a <code>bistable</code> system, meaning that it will 'lock in' to either a state with high A and no B or a state with high B and no A. Which one it ends up in depends on the initial conditions.</p>
 
 </div>
 </div>
@@ -11975,15 +11988,16 @@ Its probably easier to just do it by hand, though.</font><br>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<p><strong>Exercise 2: Activator-Repressor Circuit</strong></p>
-<p>Convert this motif into the corresponding set of ODEs.</p>
+<font color='teal'>**Exercise 2: Activator-Repressor Circuit**</font>
+
+<p>This motif is a classical <code>Gierer-Meinhardt activator-repressor system</code>. An activator $A$ stimulates the production of both itself and of a repressor $R$, which inhibits the production of $A$. These types of system are the basis of many different mechanisms of patterning in space and time.</p>
+<p>Note that this is another case where the production of the molecules is modulated. Use a <code>Michaelis-Menten</code>-like term to describe these modulations. For the inhibitory modulation of $R$ on the production of $A$, find a way to adjust the <code>Michaelis-Menten Equation</code> such that the modulation is inverted; in the absence of $R$, $A$ should be expressed at its base rate, which should be asymptotically reduced to 0 as the concentration of $R$ increases.</p>
 <p><img src="ipynb_figures/activator_repressor.png" alt="Activator-Repressor Circuit" style="width: 300px;"/></p>
-<p>Your solution:</p>
-<p><br></p>
-<p><font color='gray'>If you wish, you can use the TEX syntax to write the equations here (see the above examples to figure it out).<br>
-Its probably better to just do it by hand, though.</font><br>
+<p><em>Convert this motif into a set of ODEs.</em></p>
+<p><font color='gray'>If you wish, you can use the TEX syntax to write the equations here.<br>
+If you have no experience with TEX equations, you can just check out the above examples to figure it out.<br>
+Its probably easier to just write down the equations by hand, though.</font><br>
 <br></p>
-<p>Side note: this is a classical <code>Gierer-Meinhardt activator-repressor motif</code>, the basis of many different mechanisms of patterning in space and time.</p>
 
 </div>
 </div>
@@ -11997,14 +12011,21 @@ Its probably better to just do it by hand, though.</font><br>
 <p><strong><font color='red'>Important Note</font></strong></p>
 <p>Transforming an arrow scheme into a set of ODEs comes with some implicit assumptions:</p>
 <ul>
-<li>The <a href="https://en.wikipedia.org/wiki/Law_of_mass_action">law of mass action</a> is assumed to apply</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Law_of_mass_action">law of mass action</a> is assumed to apply<ul>
+<li>Except for interactions that are not modeled as proper chemical reactions, like the TF</li>
+</ul>
+</li>
 </ul>
 <ul>
-<li>The system is assumed to be 'well-stirred' (space/diffusion do not play a role in the system's dynamics)</li>
+<li>The system is assumed to be 'well-stirred'<ul>
+<li>Space/diffusion do not play a role in the system's dynamics</li>
+<li>All reactants are equally accessible to all other reactants</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li>The number of reactants per reaction volume is assumed to be large enough to be accurately generalized as a 'concentration'<ul>
-<li>Otherwise, stochastic/particle-based models will yield far more accurate results</li>
+<li>If low numbers of molecules are involved, stochastic/particle-based models will yield more accurate results</li>
 </ul>
 </li>
 </ul>
@@ -12025,9 +12046,12 @@ Its probably better to just do it by hand, though.</font><br>
 \end{align}<p><strong>Analytical solution:</strong></p>
 \begin{align}
 X(t) & = \frac{b}{a} + X_{t_0} \cdot e^{a \cdot t}
-\end{align}<p>However, for most systems of ODEs we encounter in practive it turns out to be either impossible or at least very complicated to find an analytical solution. That's why the rest of this tutorial focuses on <code>numerical</code> solutions.</p>
-<p>Numerical solutions are essentially <code>iterative algorithms</code>. Starting from the <code>initial conditions</code> (the state of the system at time $t_0$), we calculate how the system would change within a very small time step $\delta t$, which gives us the new state of the system at $t_1$. We then plug the concentrations at $t_1$ back into the equation to get the change for the next timestep and so forth.</p>
-<p><strong>Numerical solution:</strong></p>
+\end{align}<p>However, for most systems of ODEs we encounter in practice it turns out to be either impossible or at least very complicated to find an analytical solution. That's why the rest of this tutorial focuses on <code>numerical</code> solutions.</p>
+<p>Numerical solutions are essentially <code>iterative algorithms</code>. Starting from the <code>initial conditions</code> (the state of the system at time $t_0$), they try to predict how the system would change in a very small time step $\delta t$. In the example below, this change is denoted as $\delta X_{t_0t_1}$. Adding this predicted change to the current state (denoted as $X_{t_0}$) predicts the new state of the system at $t_1$ (denoted as $X_{t_1}$). This is then fed back into the algorithm to predict the change for the next time step, and so forth...</p>
+<p><strong>Example ODE:</strong></p>
+\begin{align}
+\frac{\delta X}{\delta t} & = a \cdot X - b 
+\end{align}<p><strong>Numerical solution:</strong></p>
 \begin{align}
 X_{t_1} & = X_{t_0} + \delta X_{t_0t_1} \\
 & \\
@@ -12038,15 +12062,16 @@ X_{t_3} & =\ ... \\
 ... \\
 & \\
 ... \\
-\end{align}<p>This kind of solution suffers from one problem: in reality, the $\delta t$ of the timesteps should be infinitesimally small (denoted as $dt$ instead of $\delta t$). For this kind of approach, however, we need to decide a finite $\delta t$, which means our solution will only be an approximation of the real solution. How well our approximation works depends on several things:</p>
+\end{align}<p>This kind of solution suffers from one problem: in reality, the $\delta t$ of the timesteps should be infinitesimally small (denoted as $dt$ instead of $\delta t$). For numerical solutions, however, we need to decide a finite $\delta t$, which means our solution will only be an approximation of the real solution.</p>
+<p>How well our approximation works depends on several things:</p>
 <ul>
-<li><strong>The size of $\delta t$:</strong> smaller time steps yield better approximations but it takes more computational time to compute the solution</li>
+<li><strong>The size of $\delta t$:</strong> smaller time steps yield better approximations but it takes more time to compute the solution</li>
 </ul>
 <ul>
-<li><strong>The ODEs themselves:</strong> in some systems the error of the approximation will remain small, in others it can propagate and amplify so that the numerical solution gets more and more wrong as time goes on.</li>
+<li><strong>The ODE system itself:</strong> in some systems the error of the approximation will remain small, in others it can propagate and amplify so that the numerical solution gets more and more wrong as time goes on.</li>
 </ul>
 <ul>
-<li><strong>How $\delta X_{t_nt_{n+1}}$ is calculated:</strong> there are different ways of calculating this term. The most straightforward (but also error-prone) approach is <code>Euler's Method</code>, shown below. Most numerical solvers built into computational packages (such as python's <code>scipy.integrate.odeint</code> function) use more advanced methods.</li>
+<li><strong>How $\delta X_{t_nt_{n+1}}$ is calculated:</strong> there are different ways of calculating this term. The most straightforward (but also quite error-prone) approach is <code>Euler's Method</code>, shown below. Most numerical solvers built into computational packages (such as python's <code>scipy.integrate.odeint</code> function) use more advanced methods.</li>
 </ul>
 <p><strong>Numerical solution by Euler's Method:</strong></p>
 \begin{align}
@@ -12059,7 +12084,10 @@ X_{t_2} & = X_{t_1} + \delta X_{t_1t_2} = X_{t_1} + (a \cdot X_{t_1} - b) \cdot 
 ... \\
 & \\
 ... \\
-\end{align}
+\end{align}<p><br><br>
+<strong>Simulation of analytical and numerical solution:</strong></p>
+<p><img src="ipynb_figures/Euler_error_fig.png" alt="Activator-Repressor Circuit" style="width: 800px;"/></p>
+<center> *Note that the error in Euler's approximation gets worse with larger $\delta t$. <br>Also, note that this is a particularly problematic case because of the exponential growth this system exhibits; for many other systems, Euler's method would not perform as poorly as this. More advanced solvers such as `odeint` would of course perform much better either way.*</center>
 </div>
 </div>
 </div>
@@ -12068,7 +12096,7 @@ X_{t_2} & = X_{t_1} + \delta X_{t_1t_2} = X_{t_1} + (a \cdot X_{t_1} - b) \cdot 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Yes,-you-can-do-this-in-Excel...">Yes, you can do this in Excel...<a class="anchor-link" href="#Yes,-you-can-do-this-in-Excel...">&#182;</a></h3>
+<h3 id="Yes,-you-can-do-this-in-Excel!--;p">Yes, you can do this in Excel!  ;p<a class="anchor-link" href="#Yes,-you-can-do-this-in-Excel!--;p">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12079,12 +12107,22 @@ X_{t_2} & = X_{t_1} + \delta X_{t_1t_2} = X_{t_1} + (a \cdot X_{t_1} - b) \cdot 
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Euler's Method for numerically solving ODEs is so simple that it can very easily be done in spreadsheet software such as Microsoft Office Excel. Because this is very graphical and interactive, it's a great way of getting to understand how numerical integration works in practice.</p>
 <p><em>The file <code>enzymatic_reaction.xlsx</code> contains an example numerical simulation of the simplified enzymatic reaction scheme discussed previously:</em></p>
-<p><img src="ipynb_figures/simple_enzyme.png" alt="Simple Enzymatic Reaction" style="width: 300px;"/></p>
-<p>Note that a plot of the reaction rate ($\frac{\delta P}{\delta t}$) over the initial substrate concentration $S$ shows the kind of saturation behavior that we would expect from a Michaelis-Menten type system. This simplified representation of an enzymatic reaction thus recapitulates one of the most fundamental dynamic properties of enzymatic reactions in general.</p>
+<p><img src="ipynb_figures/enzyme.png" alt="Simple Enzymatic Reaction" style="width: 300px;"/></p>
+<p>Note that a plot of the reaction rate ($\frac{\delta P}{\delta t}$) over the initial substrate concentration $S$ shows the kind of saturation behavior that we would expect from a <code>Michaelis-Menten</code>-type system. This simplified representation of an enzymatic reaction thus recapitulates one of the most fundamental dynamic properties of enzymatic reactions in general.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<p><strong>Exercise 3: Numerical Simulation in a Spreadsheet</strong></p>
-<p>Use your favorite spreadsheet software to numerically solve the <em>Double-Negative Positive Feedback Loops</em> motif. Play with initial conditions, parameters and visualizations; try to find a visualization that illustrates the <code>bistability</code> of this system.</p>
-<p><img src="ipynb_figures/bistable.png" alt="DNPF Bistable Circuit" style="width: 300px;"/></p>
+<font color='teal'>**Exercise 3: Numerical Simulation in a Spreadsheet**</font> 
+
+<p><em>Use your favorite spreadsheet software to numerically solve the 'Ligand-Receptor Binding &amp; Dimerization' motif from exercise 1.</em></p>
+<p><img src="ipynb_figures/receptor_ligand_dimerization.png" alt="Receptor-Ligand Binding and Dimerization" style="width: 300px;"/></p>
 
 </div>
 </div>
@@ -12103,9 +12141,9 @@ X_{t_2} & = X_{t_1} + \delta X_{t_1t_2} = X_{t_1} + (a \cdot X_{t_1} - b) \cdot 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>While spreadsheet software is nice as a starting point for playing around with ODEs, it is recommended to swiftly move on to an actual programming language, as they provide better numerical solvers and more flexibility in making measurements and creating visualizations of the systemp's dynamic behavior.</p>
-<p>Here is an example script that illustrates how to numerically solve the simplified enzymatic reaction from above.</p>
-<p><img src="ipynb_figures/simple_enzyme.png" alt="Simple Enzymatic Reaction" style="width: 300px;"/></p>
+<p>While spreadsheet software is nice as a starting point for playing around with ODEs, it is recommended to swiftly move on to an actual programming language, as they provide better numerical solvers and more flexibility in making measurements and creating visualizations of the system's dynamic behavior.</p>
+<p>Below is an exemplary python script that illustrates how to numerically solve the simplified enzymatic reaction discussed previously.</p>
+<p><img src="ipynb_figures/enzyme.png" alt="Simple Enzymatic Reaction" style="width: 300px;"/></p>
 \begin{align}
 \frac{\delta E}{\delta t} & = -b \cdot E \cdot S + d \cdot EP \\
 \frac{\delta S}{\delta t} & =  -b \cdot E \cdot S \\
@@ -12136,8 +12174,9 @@ X_{t_2} & = X_{t_1} + \delta X_{t_1t_2} = X_{t_1} + (a \cdot X_{t_1} - b) \cdot 
 <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">dt</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;time steps:&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
 
-<span class="c"># ODE system (in format used for odeint)</span>
+<span class="c"># ODE system (in format used for the odeint function)</span>
 <span class="k">def</span> <span class="nf">myODE</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">params</span><span class="p">):</span>
     
     <span class="c"># Unpack parameters and current state</span>
@@ -12153,10 +12192,13 @@ X_{t_2} & = X_{t_1} + \delta X_{t_1t_2} = X_{t_1} + (a \cdot X_{t_1} - b) \cdot 
     <span class="c"># Return results</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">dE</span><span class="p">,</span><span class="n">dS</span><span class="p">,</span><span class="n">dEP</span><span class="p">,</span><span class="n">dP</span><span class="p">)</span>
 
-<span class="c"># Solve using odeint</span>
+<span class="c"># Solve using odeint function from scipy.integrate</span>
+<span class="c"># Note: odeint employs an advanced numerical solver for ordinary differential equations</span>
+<span class="c">#       called LSODA, which automatically selects from different approximation methods</span>
+<span class="c">#       to maximize the speed and accuracy of the solution.</span>
 <span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
 <span class="n">solution</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">myODE</span><span class="p">,</span><span class="n">ini</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params</span><span class="p">,))</span>
-<span class="k">print</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;output shape:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
 <span class="n">Et</span>  <span class="o">=</span> <span class="n">solution</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">St</span>  <span class="o">=</span> <span class="n">solution</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">EPt</span> <span class="o">=</span> <span class="n">solution</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
@@ -12164,11 +12206,11 @@ X_{t_2} & = X_{t_1} + \delta X_{t_1t_2} = X_{t_1} + (a \cdot X_{t_1} - b) \cdot 
 
 <span class="c"># Show plot over time</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">Pt</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="s">&#39;.-&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#39;P&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">St</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="s">&#39;.-&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#39;S&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">EPt</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="s">&#39;.-&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;orange&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#39;EP&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&quot;time [a.u.]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&quot;time [a.u.]&quot;</span><span class="p">)</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&quot;concentrations [a.u.]&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -12184,7 +12226,8 @@ X_{t_2} & = X_{t_1} + \delta X_{t_1t_2} = X_{t_1} + (a \cdot X_{t_1} - b) \cdot 
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(200L, 4L)
+<pre>time steps: [ 0.   0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9]
+output shape: (200L, 4L)
 </pre>
 </div>
 </div>
@@ -12760,8 +12803,9 @@ AAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<p><strong>Exercise 4: Numerical Simulation in Python</strong></p>
-<p>Understand how the code above works and modify it to simulate a system of your choice, either one of those shown above or one that you come up with yourself. Play with the parameters and initial conditions and try to understand the dynamic behavior of your system of choice.</p>
+<font color='teal'>**Exercise 4: Numerical Simulation in Python**</font>
+
+<p><em>Understand how the code above works and modify it to simulate a system of your choice, either one of those shown above or one that you come up with yourself (recommended: the <code>Gierer-Meinhardt Activator-Repressor system</code> from exercise 2). Play with the parameters and initial conditions and try to understand the dynamic behavior of your system of choice.</em></p>
 
 </div>
 </div>
@@ -12784,7 +12828,7 @@ AAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Final-Words:-Models-are-Models-are-Models">Final Words: Models are Models are Models<a class="anchor-link" href="#Final-Words:-Models-are-Models-are-Models">&#182;</a></h3>
+<h3 id="A-Note-on-Parameters">A Note on Parameters<a class="anchor-link" href="#A-Note-on-Parameters">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12793,8 +12837,41 @@ AAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>When working with mathematical models like these, it is important to keep in mind that they are <strong>just</strong> models. Always remember that you are simplifying reality quite a lot to arrive at the model, and that there are a number of underlying assumptions in the math itself. It is thus crucial to check simulation outcomes carefully and to have a tight integration with actual experimental results. <strong>Speculation is still speculation, even if you are putting numbers on it with a quantitative model.</strong></p>
-<p>On the flipside, these are not <strong>just</strong> models. They are quantitative, mathematically rigorous models that tend to encourage us to make our simplifications and assumptions <em>explicit</em>. This is a great advantage over the more informal theoretical reasoning we usually employ when thinking about our systems and experiments!</p>
+<p>As you have probably noticed, one of the big challenges in working with these models is to figure out the right values for all the free parameters. This is indeed not trivial and often becomes an important part of the analysis of a model.</p>
+<p>Here are some options for how to go about the search for parameter values:</p>
+<ol>
+<li><p><strong>Get them from literature</strong></p>
+<ul>
+<li>In some cases, some of the required parameters have already been measured for exactly the reactions of interest.</li>
+<li>More often than not, this is not the case, but known parameters for closely related reactions provide a starting point for estimating the parameter.
+<br><br></li>
+</ul>
+</li>
+<li><p><strong>Measure them</strong></p>
+<ul>
+<li>Sometimes there is a method to directly measure the parameters for the reactions of interest.</li>
+<li>This is occasionally possible <em>in vivo</em>, using pulse-chase or FRAP experiments.</li>
+<li>However, it wll usually required purified compounds for biochemical analysis.</li>
+<li>In practice, it is often infeasible to measure all the parameters relevant for a model...
+<br><br></li>
+</ul>
+</li>
+<li><p><strong>Fit them based on the data</strong></p>
+<ul>
+<li>You can compare the outcome of your simulations to actual data you have about the system.</li>
+<li>Optimization algorithms (see for example <code>scipy.optimize</code>) can automatically search for a parameter combination that fits the simulation outcome closely to the available data.</li>
+<li>Note that a good fit does <em>not</em> guarantee that the model accurately represents reality. Complicated models with many free parameters will often be able to fit almost any data; it's important to further test the model's predictions with new experiments.</li>
+<li>Advanced model fitting algorithms will often also provide estimates of uncertainty for the parameter fits.
+<br><br></li>
+</ul>
+</li>
+<li><p><strong>Estimate and explore</strong></p>
+<ul>
+<li>As a starting point (or if all other options are unavailable), it is also permissible to just estimate parameters. Known biology will usually provide a range of possible values, within which you can play around based on what you expect.</li>
+<li>A more formal way of doing this is the <code>parameter screen</code>: here, the simulation is run many times, each time with a slight change in the parameters. Some outcome of interest (such as the reaction speed in the enzyme example above) is measured for each simulation and then plotted over the parameter. This can yield insight into possible different system behaviors with slightly different parameters. It is also useful to check whether the system's behavior is robust, meaning it stays roughly the same for small changes in the parameters.</li>
+</ul>
+</li>
+</ol>
 
 </div>
 </div>
@@ -12804,7 +12881,116 @@ AAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Updates-to-this-Tutorial"><font color="red">Updates to this Tutorial</font><a class="anchor-link" href="#Updates-to-this-Tutorial">&#182;</a></h3><p>It should be noted that this tutorial was put together rather hastily, especially the second half. I am planning on going through everthing again in the next few days to add some more stuff and iron out some problems! In the meantime, any feedback is of course very welcome!</p>
+<h3 id="Final-Words:-Models-are-Models-are-Models">Final Words: Models are Models are Models<a class="anchor-link" href="#Final-Words:-Models-are-Models-are-Models">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When working with mathematical models like these, it is important to keep in mind that they are <strong>just models</strong>. Always remember that you are simplifying reality quite a lot to arrive at the model, and that there are a number of underlying assumptions in the math itself. It is thus crucial to check simulation outcomes carefully and to have a tight integration with actual experimental results. <strong>Speculation is still speculation</strong>, even if you are putting fancy numbers on it with a quantitative model.</p>
+<p>On the flipside, do not let people tell you that these models are <strong>not just models</strong>. They are <em>quantitative, mathematically rigorous models</em> that encourage us to make our simplifications and assumptions <em>explicit</em>. This is a great advantage over the more informal theoretical reasoning we otherwise employ when thinking about our systems and experiments (also known as 'hand-waving')!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Materials-for-Further-Study">Materials for Further Study<a class="anchor-link" href="#Materials-for-Further-Study">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p><strong>Tutorials &amp; Exercises online</strong><br><br></p>
+<ul>
+<li><p>"Modelling in Biology" lecture script</p>
+<ul>
+<li>Extensive course on modeling in biology with focus on ODEs</li>
+<li>Focuses on theory, not the computational side of modeling</li>
+<li><a href="http://www.bg.ic.ac.uk/research/g.stan/2010_Course_MiB_article.pdf">Link</a><br><br></li>
+</ul>
+</li>
+<li><p>"Programming in Biology" course website</p>
+<ul>
+<li>Nice exercises on ODEs/PDEs in section "Dynamical Systems"</li>
+<li>Python-oriented</li>
+<li><a href="http://psaha.github.io/hello-biosphere/dynamsys.html">Link</a><br><br></li>
+</ul>
+</li>
+<li><p><em>You can find more tutorials on computational modeling in the Coding Club's curated database of online materials!</em></p>
+<ul>
+<li><a href="https://bio-it.embl.de/coding-club/curated-tutorials/">Link</a> [Intranet access required]<br><br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Books &amp; E-books</strong><br><br></p>
+<ul>
+<li><p>"Computational Modeling of Signaling Networks" (2012)</p>
+<ul>
+<li>Example-oriented overview created by leading people in the field of biological modeling</li>
+<li>Chapter 1 focuses on ODEs but the rest is also worth reading</li>
+<li><a href="http://link.springer.com/book/10.1007/978-1-61779-833-7">Link</a> [PDF available for free from within EMBL]<br><br></li>
+</ul>
+</li>
+<li><p>"In Silico Systems Biology" (2013)</p>
+<ul>
+<li>Methods- and tools-oriented introduction to various standard mathematical models</li>
+<li><a href="http://link.springer.com/book/10.1007%2F978-1-62703-450-0">Link</a> [PDF available for free from within EMBL]<br><br></li>
+</ul>
+</li>
+<li><p><em>Don't forget to check out the library! :)</em><br><br></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Packages and Software</strong><br><br></p>
+<ul>
+<li><p>Besides general solver in <code>scipy</code>, there are many packages/modules available (for python as well as for many other languages) that are specifically built for biological modeling, both with ODEs and other methods. Listed here are two good examples.<br><br></p>
+</li>
+<li><p>PySB</p>
+<ul>
+<li>Nice framework for modeling of dynamical systems in python</li>
+<li><a href="http://pysb.org/">Main Page Link</a>, <a href="http://pysb.readthedocs.io/en/latest/tutorial.html">Tutorial Link</a><br><br></li>
+</ul>
+</li>
+<li><p>CompuCell3D</p>
+<ul>
+<li>Nice python-based software for cellular-scale modeling</li>
+<li>Mainly based on "Cellular Potts / GGH" modeling to represent cells and their behaviors (movement, division, ...)</li>
+<li>In addition allows use of ODEs and PDEs to simulate extacellular gradients or intracellular dynamical systems</li>
+<li>Tight integration with python give additional freedom over model simulation and analysis</li>
+<li><a href="http://www.compucell3d.org/">Main Page Link</a>, <a href="http://www.compucell3d.org/Tutorials">Tutorial Link</a><br><br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>EMBL Bio-IT Course on Biological Modeling</strong></p>
+<ul>
+<li><p>As far as I know, there are currently no courses planned on biological modeling.</p>
+</li>
+<li><p>However, if you are interested in learning and applying modeling approaches at EMBL, please let <strong>Toby Hodges (Bio-IT)</strong> know about it!</p>
+</li>
+<li><p>If there is a significant demand for it, a course may be organized!</p>
+</li>
+</ul>
+</li>
+</ul>
 
 </div>
 </div>
