@@ -21,6 +21,6 @@ This repo collects my materials (as well as possibly those of some other tutors 
 
 #### Biological Modeling with Differential Equations
 **Date & Time:** 04.05.2017, 17:00-17:30    
-**Level:** Beginner and Intermediate    
-**Language:** All Levels    
+**Level:** All Levels   
+**Language:** General, with an example in Python (and one in Excel ;p)
 **Abstract:** Differential Equations provide an intuitive and powerful mathematical framework for modeling and simulating dynamical systems, in particular bio-chemical systems such as signaling pathways, metabolic pathways, or gene regulatory circuits. The basics of differential equation modeling are easy to grasp and readily applicable to learn something about any pathway of interest. In this tutorial, you will learn how to transform typical "arrow schemes" of pathways into a set of Ordinary Differential Equations (ODEs), and how to use these ODEs to simulate a pathway and understand its dynamics.    
