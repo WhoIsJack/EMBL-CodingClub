@@ -25,3 +25,23 @@ This repo collects my materials (as well as possibly those of some other tutors 
 **Level:** All Levels   
 **Language:** General, with an example in Python (and one in Excel ;p)    
 **Abstract:** Differential Equations provide an intuitive and powerful mathematical framework for modeling and simulating dynamical systems, in particular bio-chemical systems such as signaling pathways, metabolic pathways, or gene regulatory circuits. The basics of differential equation modeling are easy to grasp and readily applicable to learn something about any pathway of interest. In this tutorial, you will learn how to transform typical "arrow schemes" of pathways into a set of Ordinary Differential Equations (ODEs), and how to use these ODEs to simulate a pathway and understand its dynamics.    
+
+
+#### Easily Organise and Parallelise Your Python Workflow Using a ‘Task Scheduler’
+**Date & Time:** 01.06.2017, 17:00-17:30    
+**Tutor:** Marvin Albert    
+**Level:** All Levels    
+**Language:** Python    
+**Abstract:** 
+The goal of this mini-tutorial will be to become familiar with an intuitive and straight-forward way to define data analysis/processing pipelines in python, which
+- structures code to keep it simple and reproducible
+- manages the workflow and lets us focus on our pipeline’s goals
+- provides automatic parallelisation on a laptop or cluster.
+
+More specifically, we will identify the data dependencies of a given data processing pipeline and break it down into elementary tasks. This will lead to a graph representation of our problem in which
+- nodes represent the data and intermediate results
+- edges represent data dependencies and processing functions.
+
+Having defined such a graph in a simple python dictionary we will then use the python module dask to conveniently handle the execution, visualisation and parallelisation of our workflow.    
+
+
