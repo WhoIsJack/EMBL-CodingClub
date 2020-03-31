@@ -63,9 +63,9 @@ Having defined such a graph in a simple python dictionary we will then use the p
 **Abstract:** In this challenge, the aim is to program a bot that is able to navigate a maze and find the exit. For beginners, a basic working example is already provided for them to understand and build upon. Intermediate-level coders are expected to get to that point from scratch, whereas experts face the additional challenge of coding an "autonomous" bot, which improves upon its performance by means of machine learning instead of additional hard-coded rules.    
 
 
-#### EPUG: Numpy Basics
-**Date & Time:** 31.03.2020, 17:00-18:00
-**Tutor:** Jonas
-**Level:** python basic/intermediate, numpy basic/intermediate
-**Language:** python
-**Abstract:** A brief introduction to the basics of numpy arrays and how to use them in scientific computing.
+#### EPUG: Numpy Basics    
+**Date & Time:** 31.03.2020, 17:00-18:00    
+**Tutor:** Jonas    
+**Level:** python basic/intermediate, numpy basic/intermediate    
+**Language:** python    
+**Abstract:** A brief introduction to the basics of numpy arrays and how to use them in scientific computing.    
