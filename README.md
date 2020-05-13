@@ -64,8 +64,17 @@ Having defined such a graph in a simple python dictionary we will then use the p
 
 
 #### EPUG: Numpy Basics    
-**Date & Time:** 31.03.2020, 17:00-18:00    
+**Date & Time:** 31.03.2020, 16:00-17:00    
 **Tutor:** Jonas    
 **Level:** python basic/intermediate, numpy basic/intermediate    
 **Language:** python    
 **Abstract:** A brief introduction to the basics of numpy arrays and how to use them in scientific computing.    
+
+#### EPUG: Numpy Simulation Example
+
+**Date & Time:** 12.05.2020, 16:00-17:00    
+**Tutor:** Jonas    
+**Level:** python intermediate, numpy intermediate    
+**Language:** python    
+**Abstract:** Live coding of a simple implementation of a 2D particle model (with ballistic motion and elastic collision) to illustrate concepts and techniques in scientific computing with numpy and in numerical simulation in general.
+
