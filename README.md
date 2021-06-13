@@ -77,3 +77,6 @@ Having defined such a graph in a simple python dictionary we will then use the p
 **Level:** python intermediate, numpy intermediate    
 **Language:** python    
 **Abstract:** Live coding of a simple implementation of a 2D particle model (with ballistic motion and elastic collision) to illustrate concepts and techniques in scientific computing with numpy and in numerical simulation in general.
+
+----
+
